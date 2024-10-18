@@ -1,5 +1,5 @@
 
-import { changeFontSize, colorText, copyText, cutText, exitFullScreen, highlightText, makeFullScreen,makeSubscript,makeSuperscript,pasteText,setLetterSpacing,setLineHeight,toggleOutline, uploadImage, uploadVideo } from "./_customFunctions.js";
+import { changeFontSize, changeFontType, colorText, copyText, cutText, exitFullScreen, highlightText, makeFullScreen,makeSubscript,makeSuperscript,pasteText,setLetterSpacing,setLineHeight,toggleOutline, uploadImage, uploadVideo } from "./_customFunctions.js";
 
 let elements = [
     { element: ".fullscreenBtn", command: makeFullScreen },
@@ -20,7 +20,7 @@ let elementsWithCustomEvent = [
     { event : "change",element: ".uploadImage", command:  (e)=>uploadImage(e.target) },
     { event : "change",element: ".uploadVideo", command:  (e)=>uploadVideo(e.target)},
     { event : "change",element: ".fontSize", command: ()=>changeFontSize(document.querySelector(".fontSize"))},
-    // { event : "change",element: ".fontName", command: ()=>changefontName(document.querySelector(".fontName"))},
+    { event : "change",element: ".fontName", command: ()=>changeFontType(document.querySelector(".fontName"))},
 ]
 
 let attachFunctionToButton = [

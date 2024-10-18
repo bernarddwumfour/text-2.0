@@ -396,3 +396,18 @@ export function changeFontSize(fontsize) {
     range.surroundContents(span);  // Wrap the selected text in the span
   }
 }
+
+export function changeFontType(fonttype) {
+  let fontType = fonttype.value; // Assuming the font type is passed as value (e.g., Arial, Times New Roman)
+  let selection = window.getSelection();
+  
+  if (selection.rangeCount > 0) {
+    let range = selection.getRangeAt(0);
+    
+    // Create a <span> element and apply the font family as an inline style
+    let span = document.createElement("span");
+    span.style.fontFamily = fontType;
+    
+    range.surroundContents(span);  // Wrap the selected text in the span
+  }
+}
