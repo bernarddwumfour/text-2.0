@@ -152,9 +152,9 @@ export const setLineHeight = (value) => {
       if (selectedText.trim()) {
         // Create a span element
         const span = document.createElement('span');
-
         // Apply line-height style to the span
-        span.style.lineHeight = value;
+        span.style.lineHeight = value; 
+        // span.style.lineHeight = `${value * 100}%`; 
         span.style.display = 'block'; // Changed to block to ensure line-height takes effect
         span.style.width = '100%'; // Optional: Ensure it spans full width
         span.style.whiteSpace = 'pre-wrap'; // Preserve wrapping and spaces
@@ -347,7 +347,7 @@ export const colorText = (textColorButton) => {
     textcolors[i]?.addEventListener('click', () => {
       const color = textcolors[i].dataset.color;
       changeTextColor(color);
-      textcolors[i].parentElement.classList.add('hidden'); // Hide after selection
+      // textcolors[i].parentElement.classList.add('hidden'); 
     });
   }
 };
@@ -359,7 +359,7 @@ export const highlightText = (highlightColorButton) => {
     markcolors[i]?.addEventListener('click', () => {
       const color = markcolors[i].dataset.color;
       changeHiliteColor(color);
-      markcolors[i].parentElement.classList.add('hidden'); // Hide after selection
+      // markcolors[i].parentElement.classList.add('hidden'); 
     });
   }
 };
