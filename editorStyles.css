@@ -1,0 +1,199 @@
+table {
+    border-collapse: collapse;
+    width: 100%;
+    position: relative;
+}
+
+th,
+td {
+    border: 1px solid black;
+    padding: 8px;
+    text-align: left;
+}
+
+/* Resizable border handles */
+.resizable-table {
+    resize: both;
+    overflow: hidden;
+    /* border: 1px solid #333; */
+}
+
+
+.shape {
+    display: inline-block;
+    /* Allows text to flow around the shape */
+    resize: both;
+    /* Enables resizing */
+    overflow: hidden;
+    /* Ensure the SVG doesn't overflow the container */
+    border: 1px solid #000;
+    position: relative;
+    padding: 0;
+    /* margin: 10px; */
+    /* Add some margin for spacing */
+}
+
+.shape svg {
+    width: 100%;
+    /* Ensures the SVG scales properly when the wrapper is resized */
+    height: 100%;
+    pointer-events: none;
+    /* Prevent direct interaction with the SVG */
+}
+
+.shape .resize-handle {
+    width: 10px;
+    height: 10px;
+    background: #ccc;
+    cursor: se-resize;
+    /* Makes it clear where to resize */
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+
+
+.shape-wrapper {
+    float: left;
+    /* Allow shapes to float left */
+    resize: both;
+    /* Enable resizing */
+    overflow: hidden;
+    /* Hide overflow */
+    /* border: 2px dashed #000; */
+    /* Only borders */
+    position: relative;
+    width: 150px;
+    /* Default size */
+    height: 150px;
+    /* Default size */
+    margin: 10px;
+    padding: 3px;
+    /* Space between shapes */
+}
+
+.shape-wrapper svg {
+    width: auto;
+    /* Maintain aspect ratio */
+    height: auto;
+    /* Maintain aspect ratio */
+    max-width: 100%;
+    /* Prevent overflow */
+    max-height: 100%;
+    /* Prevent overflow */
+    pointer-events: none;
+    position: absolute;
+    left: 0;
+    /* Prevent direct interaction with the SVG */
+}
+
+.text-editor p {
+    margin-top: 1rem;
+    /* Space for text below shapes */
+}
+
+.resize-handle {
+    width: 10px;
+    height: 10px;
+    background: #333;
+    /* Color for the resize handle */
+    position: absolute;
+    cursor: nwse-resize;
+    /* right:0; */
+    /* Default cursor for resizing */
+}
+
+
+.chart-wrapper {
+    position: relative;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    /* Prevents content from overflowing */
+    padding: 3px;
+    /* Inner padding for the chart */
+    max-width: calc(100% - 3rem);
+    /* Maximum width for the wrapper */
+    max-height: 400px;
+    /* Maximum height for the wrapper */
+}
+
+.chart-wrapper {
+    position: relative;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    /* Prevents content from overflowing */
+    padding: 3px;
+    /* Inner padding for the chart */
+    max-width: calc(100% - 3rem);
+    /* Maximum width for the wrapper */
+    max-height: 400px;
+    /* Maximum height for the wrapper */
+}
+
+.resize-handle {
+    width: 10px;
+    height: 10px;
+    background: #333;
+    /* Color for the resize handle */
+    position: absolute;
+    cursor: nwse-resize;
+    /* Default cursor for resizing */
+}
+
+/* Position the resize handle at the bottom right */
+.resize-handle.bottom-right {
+    right: 0;
+    /* Align to the right */
+    bottom: 0;
+    /* Align to the bottom */
+}
+
+
+ul {
+    list-style: circle;
+    list-style-position: inside;
+}
+
+ol {
+    list-style: decimal;
+    list-style-position: inside;
+}
+
+/* Styles for resizable wrapper */
+.resizable-wrapper {
+    position: relative;
+    resize: both;
+    /* Allow resizing both horizontally and vertically */
+    overflow: hidden;
+    /* Prevent content from overflowing */
+    display: inline-block;
+    /* Keep it inline with text */
+    padding: 0.5rem;
+    /* Add padding inside the wrapper */
+    border: none;
+    /* Optional: Add dashed border */
+    max-width: calc(100% - 4rem);
+    /* Prevent resizing beyond editor width minus 4rem */
+    height: auto;
+    /* Let the height adjust automatically */
+}
+
+/* Ensure media (images/videos) take full width of the wrapper */
+.resizable-wrapper img,
+.resizable-wrapper video {
+    display: block;
+    width: 100%;
+    /* Scale media to fit the wrapper */
+    height: auto;
+    /* Maintain aspect ratio */
+}
+
+blockquote {
+    border-left: 4px solid gray;
+    margin: 10px 0;
+    padding-left: 10px;
+    font-style: italic;
+    /* Optional */
+    color: #555;
+    /* Optional color for the text */
+}

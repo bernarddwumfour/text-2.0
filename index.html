@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<script src="https://kit.fontawesome.com/b806e80b78.js" crossorigin="anonymous"></script>
+<link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<!-- <script src="https://cdn.tailwindcss.com"></script> -->
+<title>Document</title>
+<link rel="stylesheet" href="./editorStyles.css">
+</head>
+
+<body class="p-5 bg-gray-200 min-h-screen left-0 pt-52">
+
+    <div class="flex flex-wrap space-x-2 bg-gray-100 p-2 rounded shadow-md mb-5 fixed w-11/12 top-4 z-10">
+
+        <div class="flex space-x-2 mt-2">
+            <!-- Fullscreen Button -->
+            <button class="p-2 hover:bg-gray-200 rounded fullscreen-btn fullscreenBtn" title="Fullscreen">
+                <i class="fas fa-expand"></i>
+            </button>
+
+            <!-- Normal Screen Button -->
+            <button class="p-2 hover:bg-gray-200 rounded normal-screen-btn previewBtn" title="Normal Screen">
+                <i class="fas fa-compress"></i>
+            </button>
+        </div>
+
+        <!-- Undo & Redo -->
+        <div class="flex space-x-2">
+            <button class="p-2 hover:bg-gray-200 rounded undo" title="Undo">
+                <i class="fas fa-undo-alt"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded redo" title="Redo">
+                <i class="fas fa-redo-alt"></i>
+            </button>
+        </div>
+
+        <!-- Clipboard & Print -->
+        <div class="flex space-x-2">
+            <button class="p-2 hover:bg-gray-200 rounded paste" title="Paste">
+                <i class="fas fa-paste"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded cut" title="Cut">
+                <i class="fas fa-cut"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded copy" title="Copy">
+                <i class="fas fa-copy"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" title="Print">
+                <i class="fas fa-print"></i>
+            </button>
+        </div>
+
+        <div class="flex space-x-2">
+            <!-- Upload Image Button -->
+            <label class="p-2 hover:bg-gray-200 rounded" title="Upload Image">
+                <i class="fas fa-file-image"></i>
+                <input type="file" id="uploadImage" accept="image/*" class="hidden uploadImage">
+            </label>
+
+            <!-- Upload File label (for PDFs, DOCX, etc.) -->
+            <label class="p-2 hover:bg-gray-200 rounded " title="Media">
+                <i class="fas fa-file-alt"></i>
+                <input type="file" id="uploadVideo" accept=".mp4" class="hidden uploadVideo">
+            </label>
+        </div>
+
+        <!-- Text & Font Settings -->
+        <div class="flex space-x-2 items-center">
+            <select class="p-2 border rounded bg-white" title="Font">
+                <option value="Arial">Arial</option>
+                <option value="Times New Roman">Times New Roman</option>
+            </select>
+            <input type="number" value="10" class="p-2 w-16 border rounded" title="Font Size">
+        </div>
+
+        <!-- First Row End -->
+
+        <!-- Second Row: Text Formatting -->
+        <div class="flex space-x-2 mt-2">
+            <button class="p-2 hover:bg-gray-200 rounded bold" title="Bold">
+                <i class="fas fa-bold"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded italic" title="Italic">
+                <i class="fas fa-italic"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded underline" title="Underline">
+                <i class="fas fa-underline"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded strikethrough" title="Strikethrough">
+                <i class="fas fa-strikethrough"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded subscript" title="Subscript">
+                <i class="fas fa-subscript"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded superscript" title="Superscript">
+                <i class="fas fa-superscript"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded outlineBtn" id="outlineBtn" title="Outline Text">
+                <i class="fas fa-border-style"></i>
+            </button>
+            <!-- text color -->
+            <div class="relative inline-block">
+                <button class="dropDownButton p-2 hover:bg-gray-200 rounded textColorButton" title="Text Color">
+                    <i class="fas fa-palette"></i>
+                    <ul
+                        class="absolute bg-white hidden p-2 rounded-md shadow-md top-[calc(100%-.3rem)] left-full dropDownMenu text-[.9rem] grid grid-cols-4 grid-flow-row gap-2 w-max">
+                        <li class="rounded-full w-7 h-7" data-color="red" style="background:red"></li>
+                        <li class="rounded-full w-7 h-7" data-color="yellow" style="background:yellow"></li>
+                        <li class="rounded-full w-7 h-7" data-color="blue" style="background:blue"></li>
+                        <li class="rounded-full w-7 h-7" data-color="#992799" style="background:#992799"></li>
+                        <li class="rounded-full w-7 h-7" data-color="green" style="background:green"></li>
+                        <li class="rounded-full w-7 h-7" data-color="black" style="background:black"></li>
+                        <li class="rounded-full w-7 h-7" data-color="gray" style="background:gray"></li>
+                    </ul>
+                </button>
+            </div>
+
+            <!-- Highlight Text -->
+            <div class="relative inline-block">
+                <button class="p-2 hover:bg-gray-200 rounded highlightTextButton dropDownButton" title="Highlight Text">
+                    <i class="fas fa-highlighter"></i>
+                    <ul
+                        class="absolute bg-white hidden p-2 rounded-md shadow-md top-[calc(100%-.3rem)] left-full dropDownMenu text-[.9rem] grid grid-cols-4 grid-flow-row gap-2 w-max">
+                        <li class="pr-5  w-7 h-7 rounded-full" data-color="#dc8f8f" style="background:red"></li>
+                        <li class="pr-5  w-7 h-7 rounded-full" data-color="#e2daa7" style="background:yellow"></li>
+                        <li class="pr-5  w-7 h-7 rounded-full" data-color="#a2ade2" style="background:blue"></li>
+                        <li class="pr-5  w-7 h-7 rounded-full" data-color="#d88bd8" style="background:purple"></li>
+                        <li class="pr-5  w-7 h-7 rounded-full" data-color="#d3ffd3" style="background:green"></li>
+                        <li class="pr-5  w-7 h-7 rounded-full shadow-lg" data-color="transparent"
+                            style="background:white"></li>
+                        <input class="pr-5  w-full h-8 rounded-sm" type="color" name="hiliteColor" id="hiliteColor">
+                    </ul>
+                </button>
+
+            </div>
+        </div>
+
+        <!-- Alignment -->
+        <div class="flex space-x-2 mt-2">
+            <button class="p-2 hover:bg-gray-200 rounded align-left" title="Align Left">
+                <i class="fas fa-align-left"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded align-center" title="Align Center">
+                <i class="fas fa-align-center"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded align-right" title="Align Right">
+                <i class="fas fa-align-right"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded justify" title="Justify">
+                <i class="fas fa-align-justify"></i>
+            </button>
+            <button class="mlineHeight p-2 hover:bg-gray-200 rounded justify" title="lineHeight" id="lineHeight">
+                <i class="fas fa-text-height mr-2"></i> <!-- Line Height Icon -->
+                <select id="lineHeightSelect" class="border rounded px-2 py-1">
+                    <option value="1">1</option>
+                    <option value="1.5">1.5</option>
+                    <option value="2">2</option>
+                    <option value="2.5">2.5</option>
+                    <option value="3">3</option>
+                </select>
+            </button>
+            <button class="letterSpacing p-2 hover:bg-gray-200 rounded justify" title="letterSpacing"
+                id="letterSpacing">
+                <i class="fas fa-letter-spacing mr-2"></i> <!-- Letter Spacing Icon -->
+                <select id="letterSpacingSelect" class="border rounded px-2 py-1">
+                    <option value="0">Normal</option>
+                    <option value="0.1">0.1em</option>
+                    <option value="0.2">0.2em</option>
+                    <option value="0.3">0.3em</option>
+                    <option value="0.4">0.4em</option>
+                </select>
+            </button>
+        </div>
+
+        <!-- Lists -->
+        <div class="flex space-x-2 mt-2">
+            <button class="p-2 hover:bg-gray-200 rounded bullet-list" title="Bullet List">
+                <i class="fas fa-list-ul"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded numbered-list" title="Numbered List">
+                <i class="fas fa-list-ol"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded indent" title="Indent">
+                <i class="fas fa-indent"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded outdent" title="Outdent">
+                <i class="fas fa-outdent"></i>
+            </button>
+        </div>
+
+        <!-- Miscellaneous -->
+        <div class="flex space-x-2 mt-2">
+            <button class="p-2 hover:bg-gray-200 rounded insert-link" title="Insert Link" id="addLink">
+                <i class="fas fa-link"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded insertQuoteBtn" id="insertQuoteBtn" title="Insert Quotation">
+                <i class="fas fa-quote-right"></i> <!-- Font Awesome icon for quotation -->
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" title="Insert Line Chart" id="lineChart">
+                <i class="fas fa-chart-line"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" title="Insert Bar Chart" id="barChart">
+                <i class="fas fa-chart-bar"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" title="Insert Pie Chart" id="pieChart">
+                <i class="fas fa-chart-pie"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" title="Insert Emoji" id="emoji">
+                <i class="fas fa-smile"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" title="Insert Symbol" id="equation">
+                <i class="fas fa-star"></i>
+            </button>
+            <button id="specialCharacters" class="p-2 hover:bg-gray-200 rounded" title="Insert Special Character">
+                <i class="fas fa-asterisk"></i> <!-- Font Awesome icon for special characters -->
+            </button>
+        </div>
+
+        <!-- Additional Icons -->
+        <div class="flex space-x-2 mt-2">
+            <button class="p-2 hover:bg-gray-200 rounded" title="Insert Calendar">
+                <i class="fas fa-calendar-alt"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" title="Insert Table" id="insertTableBtn">
+                <i class="fas fa-table"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" title="Insert Book">
+                <i class="fas fa-book"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" title="Insert Microphone">
+                <i class="fas fa-microphone"></i>
+            </button>
+
+            <!-- Shape Insertion Buttons -->
+            <button class="p-2 hover:bg-gray-200 rounded" id="insertCircleBtn" title="Insert Circle">
+                <i class="fas fa-circle"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" id="insertRectBtn" title="Insert Rectangle">
+                <i class="fas fa-square"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" id="insertTriangleBtn" title="Insert Triangle">
+                <i class="fas fa-play fa-rotate-270"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded horizontalLine"  title="Insert Line">
+                <i class="fas fa-minus"></i>
+            </button>
+            <button class="p-2 hover:bg-gray-200 rounded" id="insertArrowBtn" title="Insert Arrow-Right">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+
+    <div id="dummymodal"
+        class="fixed w-wull h-full hidden justify-center items-center  z-10 inset-0 bg-[rgba(0,0,0,0.8)]">
+    </div>
+
+
+    <template id="addEmojiModal">
+        <div class="dummmymodal bg-white rounded-lg p-8 shadow-lg w-[500px]">
+            <p class="text-center text-gray-700">Add Emojis<br /></p>
+            <div class="h-[200px] overflow-y-scroll">
+                <div class="py-6 grid grid-cols-7">
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😀</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😁</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😂</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🤣</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😊</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😍</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🤩</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😎</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🥳</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😏</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😜</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🤪</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😇</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😷</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🤔</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🙄</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😬</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😭</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">😡</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🥺</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">👍</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">👎</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">👊</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">👏</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🙌</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🙏</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">💪</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">🤙</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">💡</span>
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">💥</span>
+
+                </div>
+            </div>
+
+            <input id="newName" name="newName" class="w-full p-2  border-gray-300 border-2 outline-none my-4">
+
+            <div class="flex justify-center gap-8">
+                <button class="bg-red-500 text-white p-2 px-6 rounded-md action">Add</button>
+                <button class="shadow-md text-violet-500 p-2 px-6 rounded-md modalCancel">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="addSpecialCharactersModal">
+        <div class="dummmymodal bg-white rounded-lg p-8 shadow-lg w-[500px]">
+            <p class="text-center text-gray-700">Add Special Characters<br /></p>
+
+            <div class="h-[200px] overflow-y-scroll">
+                <div class="py-6 grid grid-cols-7">
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#9733;</span>
+                    <!-- ★ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#9734;</span>
+                    <!-- ☆ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#9829;</span>
+                    <!-- ♥ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#9830;</span>
+                    <!-- ♦ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#9827;</span>
+                    <!-- ♣ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#9824;</span>
+                    <!-- ♠ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8704;</span>
+                    <!-- ∀ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8706;</span>
+                    <!-- ∂ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8707;</span>
+                    <!-- ∃ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8711;</span>
+                    <!-- ∇ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8712;</span>
+                    <!-- ∈ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8715;</span>
+                    <!-- ∋ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8721;</span>
+                    <!-- ∑ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8727;</span>
+                    <!-- ∗ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8730;</span>
+                    <!-- √ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8734;</span>
+                    <!-- ∞ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8743;</span>
+                    <!-- ∧ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8744;</span>
+                    <!-- ∨ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8747;</span>
+                    <!-- ∫ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8756;</span>
+                    <!-- ∴ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8800;</span>
+                    <!-- ≠ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8801;</span>
+                    <!-- ≡ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8804;</span>
+                    <!-- ≤ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8805;</span>
+                    <!-- ≥ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8834;</span>
+                    <!-- ⊂ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8835;</span>
+                    <!-- ⊃ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8838;</span>
+                    <!-- ⊆ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8839;</span>
+                    <!-- ⊇ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8853;</span>
+                    <!-- ⊕ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8869;</span>
+                    <!-- ⊥ -->
+
+                </div>
+            </div>
+
+            <input id="newName" name="newName" class="w-full p-2  border-gray-300 border-2 outline-none my-4">
+            <div class="flex justify-center gap-8">
+                <button class="bg-red-500 text-white p-2 px-6 rounded-md action">Add</button>
+                <button class="shadow-md text-violet-500 p-2 px-6 rounded-md modalCancel">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="addLinkModal">
+        <div class="dummmymodal bg-white rounded-lg p-8 shadow-lg w-[500px]">
+            <p class="text-center text-gray-700">Add A Link<br /></p>
+            <input id="link" name="link" class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4"
+                placeholder="Enter Link here">
+            <input id="linkText" name="linkText"
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4"
+                placeholder="Enter Link text">
+            <div class="flex justify-center gap-8">
+                <button class="bg-red-500 text-white p-2 px-6 rounded-md action">Add</button>
+                <button class="shadow-md text-violet-500 p-2 px-6 rounded-md modalCancel">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="addEquationModal">
+        <div class="dummmymodal bg-white rounded-lg p-8 shadow-lg w-[500px]">
+            <p class="text-center text-gray-700">Add equation symbols<br /></p>
+
+
+            <div class="h-[200px] overflow-y-scroll">
+                <div class="py-6 grid grid-cols-7">
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#43;</span>
+                    <!-- + -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8722;</span>
+                    <!-- − (minus sign) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#215;</span>
+                    <!-- × -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#247;</span>
+                    <!-- ÷ -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#61;</span>
+                    <!-- = -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#60;</span>
+                    <!-- < (less than) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#62;</span>
+                    <!-- > (greater than) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#177;</span>
+                    <!-- ± (plus-minus) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8730;</span>
+                    <!-- √ (square root) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8776;</span>
+                    <!-- ≈ (approximately equal) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8800;</span>
+                    <!-- ≠ (not equal) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8804;</span>
+                    <!-- ≤ (less than or equal to) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8805;</span>
+                    <!-- ≥ (greater than or equal to) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8721;</span>
+                    <!-- ∑ (summation) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8747;</span>
+                    <!-- ∫ (integral) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8719;</span>
+                    <!-- ∏ (product) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8706;</span>
+                    <!-- ∂ (partial differential) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8711;</span>
+                    <!-- ∇ (nabla/gradient) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8733;</span>
+                    <!-- ∝ (proportional to) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8734;</span>
+                    <!-- ∞ (infinity) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8743;</span>
+                    <!-- ∧ (logical and) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8744;</span>
+                    <!-- ∨ (logical or) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8745;</span>
+                    <!-- ∩ (intersection) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8746;</span>
+                    <!-- ∪ (union) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8756;</span>
+                    <!-- ∴ (therefore) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8869;</span>
+                    <!-- ⊥ (perpendicular) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8853;</span>
+                    <!-- ⊕ (circled plus) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8757;</span>
+                    <!-- ∵ (because) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8764;</span>
+                    <!-- ∼ (similar to) -->
+                    <span
+                        class="text-3xl cursor-pointer p-2 hover:bg-gray-200 flex items-center justify-center">&#8712;</span>
+                    <!-- ∈ (element of) -->
+
+                </div>
+            </div>
+
+            <input id="newName" name="newName" class="w-full p-2  border-gray-300 border-2 outline-none my-4">
+            <div class="flex justify-center gap-8">
+                <button class="bg-red-500 text-white p-2 px-6 rounded-md action">Add</button>
+                <button class="shadow-md text-violet-500 p-2 px-6 rounded-md modalCancel">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="addBarChartModal">
+        <div class="dummmymodal bg-white rounded-lg p-8 shadow-lg w-[500px]" data-graph="bar">
+            <p class="text-center text-gray-700">Add Bar Chart<br /></p>
+            <input id="labels" name="labels" placeholder="Labels(x-values) eg.red,yellow,blue..."
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4">
+            <input id="values" name="values" placeholder="Values(y-values) eg.25,16,18..."
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4">
+            <input id="label" name="label" placeholder="Chart Label(title)"
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4">
+            <div class="flex justify-center gap-8">
+                <button class="bg-red-500 text-white p-2 px-6 rounded-md action">Add</button>
+                <button class="shadow-md text-violet-500 p-2 px-6 rounded-md modalCancel">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="addLineChartModal">
+        <div class="dummmymodal bg-white rounded-lg p-8 shadow-lg w-[500px] " data-graph="line">
+            <p class="text-center text-gray-700">Add Line Chart<br /></p>
+            <input id="labels" name="labels" placeholder="Labels(x-values) eg.red,yellow,blue..."
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4">
+            <input id="values" name="values" placeholder="Values(y-values) eg.25,16,18..."
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4">
+            <input id="label" name="label" placeholder="Chart Label(title)"
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4">
+            <div class="flex justify-center gap-8">
+                <button class="bg-red-500 text-white p-2 px-6 rounded-md action">Add</button>
+                <button class="shadow-md text-violet-500 p-2 px-6 rounded-md modalCancel">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <template id="addPieChartModal">
+        <div class="dummmymodal bg-white rounded-lg p-8 shadow-lg w-[500px]" data-graph="pie">
+            <p class="text-center text-gray-700">Add Pie Chart<br /></p>
+            <input id="labels" name="labels" placeholder="Labels(x-values) eg.red,yellow,blue..."
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4">
+            <input id="values" name="values" placeholder="Values(y-values) eg.25,16,18..."
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4">
+            <input id="label" name="label" placeholder="Chart Label(title)"
+                class="w-full p-2 text-[.9rem] border-gray-400 border-[1.5px] border-2 my-4">
+            <div class="flex justify-center gap-8">
+                <button class="bg-red-500 text-white p-2 px-6 rounded-md action">Add</button>
+                <button class="shadow-md text-violet-500 p-2 px-6 rounded-md modalCancel">Cancel</button>
+            </div>
+        </div>
+    </template>
+
+    <!-- Contenteditable Area (A4 size) -->
+    <div id="textEditor" class="textEditor bg-white shadow-lg mx-auto p-10 py-18 relative" contenteditable="true"
+        style="width: 210mm; height: 297mm;">
+        <!-- <h2 class="text-center text-lg">Editable A4 Page</h2> -->
+        <p>This is a contenteditable area that you can type in. It's the size of an A4 sheet.</p>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <script type="module" src="./index.js"></script>
+    <script type="module" src="./scripts/manualImplementation.js"></script>
+    <script>
+
+    </script>
+</body>
+
+</html>
