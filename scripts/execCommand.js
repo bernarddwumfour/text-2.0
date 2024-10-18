@@ -25,6 +25,7 @@ let elements = [
     { element: ".insert-link", command: "createLink" },
     { element: ".horizontalLine", command: "insertHorizontalRule" },
     { element: ".insertQuoteBtn", command: "formatBlock", value : "blockquote" },
+    { element: ".fontName", command: "fontName", value : document.querySelector(".fontName").value },
 ];
 
 

@@ -381,3 +381,18 @@ export const highlightText = (highlightColorButton) => {
 //       textcolors[i].parentElement.classList.add('hidden');
 //     });
 // }
+
+export function changeFontSize(fontsize) {
+  let fontSize = fontsize.value + 'px';
+  let selection = window.getSelection();
+  
+  if (selection.rangeCount > 0) {
+    let range = selection.getRangeAt(0);
+    
+    // Create a <span> element and apply the font size as an inline style
+    let span = document.createElement("span");
+    span.style.fontSize = fontSize;
+    
+    range.surroundContents(span);  // Wrap the selected text in the span
+  }
+}
