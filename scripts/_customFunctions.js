@@ -411,3 +411,73 @@ export function changeFontType(fonttype) {
     range.surroundContents(span);  // Wrap the selected text in the span
   }
 }
+
+
+export function addQuotation(){
+  const selection = window.getSelection();
+    
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+
+        // Create a blockquote element
+        const blockquote = document.createElement("blockquote");
+        blockquote.style.borderLeft = "1px solid #ccc"; // Optional style
+        blockquote.style.marginLeft = "10px"; // Indent the blockquote
+        blockquote.style.paddingLeft = "10px"; // Add padding to the left
+        blockquote.style.fontStyle = "italic"; // Optional italic text style
+
+        // Insert selected text into blockquote
+        blockquote.textContent = range.toString();
+        range.deleteContents(); // Remove the selected text
+        range.insertNode(blockquote);
+        editor.appendChild(document.createElement("br")) // Insert the blockquote in place of the selected text
+    }
+}
+
+export function wrapParagraph (){
+  const selection = window.getSelection();
+    
+    if (selection.rangeCount > 0) {
+        const range = selection.getRangeAt(0);
+
+        // Check if startContainer is a text node or element
+        let parentElement = range.startContainer.nodeType === 3 
+            ? range.startContainer.parentElement 
+            : range.startContainer;
+
+        // Find the closest paragraph element
+        const parentParagraph = parentElement.closest('p');
+        
+        if (parentParagraph) {
+            const wrapperDiv = document.createElement('div');
+            // wrapperDiv.style.border = "1px solid #ccc";
+            // wrapperDiv.style.padding = "10px";
+            wrapperDiv.style.margin = "10px 0";
+            
+            // Wrap the paragraph in a div
+            parentParagraph.parentNode.insertBefore(wrapperDiv, parentParagraph);
+            wrapperDiv.appendChild(parentParagraph);
+        }
+    }
+}
+
+export function paragraphLineSpacing (value){
+  const lineHeight = value;
+
+  const selection = window.getSelection();
+  if (selection.rangeCount > 0) {
+      const range = selection.getRangeAt(0);
+
+      // Check if startContainer is a text node or element
+      let parentElement = range.startContainer.nodeType === 3 
+          ? range.startContainer.parentElement 
+          : range.startContainer;
+
+      // Find the closest paragraph element
+      const parentParagraph = parentElement.closest('p');
+      
+      if (parentParagraph) {
+          parentParagraph.style.lineHeight = lineHeight;
+      }
+  }
+}

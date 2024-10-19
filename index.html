@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <script src="https://kit.fontawesome.com/b806e80b78.js" crossorigin="anonymous"></script>
 <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+<!-- Google Fonts Links -->
+<link
+    href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Lato:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;700&family=Raleway:wght@400;700&family=Poppins:wght@400;700&family=Merriweather:wght@400;700&family=Nunito:wght@400;700&family=Slabo+27px&family=Source+Sans+Pro:wght@400;700&family=Fira+Sans:wght@400;700&family=PT+Sans:wght@400;700&family=Ubuntu:wght@400;700&family=Playfair+Display:wght@400;700&family=Lora:wght@400;700&family=Quicksand:wght@400;700&family=PT+Serif:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Titillium+Web:wght@400;700&display=swap"
+    rel="stylesheet">
+
 <!-- <script src="https://cdn.tailwindcss.com"></script> -->
 <title>Document</title>
 <link rel="stylesheet" href="./editorStyles.css">
@@ -237,6 +242,21 @@
                     <option value="0.4">0.4em</option>
                 </select>
             </button>
+            
+            <button class="p-2 hover:bg-gray-200 rounded wrapParagraph" title="Wrap Paragraph" id="wrapParagraphBtn">
+                <i class="fas fa-paragraph"></i> <!-- Font Awesome icon for paragraph -->
+            </button>
+
+            <!-- Line Spacing Dropdown -->
+            <button class="paragraphLineSpacing p-2 hover:bg-gray-200 rounded line-spacing-wrapper" title="Line Spacing">
+                <label for="lineSpacing" class="sr-only">Line Spacing</label>
+                <select id="paragraphLineSpacing" class="p-2 bg-white border border-gray-300 rounded">
+                    <option value="1">Single</option>
+                    <option value="1.5">1.5</option>
+                    <option value="2">Double</option>
+                </select>
+            </button>
+
         </div>
 
         <!-- Lists -->
