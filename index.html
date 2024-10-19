@@ -283,6 +283,24 @@
             <button class="p-2 hover:bg-gray-200 rounded insertQuoteBtn" id="insertQuoteBtn" title="Insert Quotation">
                 <i class="fas fa-quote-right"></i> <!-- Font Awesome icon for quotation -->
             </button>
+            <button class="p-2 hover:bg-gray-200 rounded addCitation" title="Insert Citation" id="addCitation">
+                <i class="fas fa-book-open"></i> 
+            </button>            
+            <!-- <button class="p-2 hover:bg-gray-200 rounded insertBookmark" title="Insert Bookmark" id="addBookmark">
+                <i class="fas fa-bookmark"></i> 
+            </button>   -->
+            <div class="relative inline-block">
+                <button class="p-2 hover:bg-gray-200 rounded highlightTextButton dropDownButton bookmarkDropdown" title="Highlight Text">
+                    <i class="fas fa-bookmark"></i>
+                    <ul
+                        class="absolute bg-white hidden p-2 rounded-md shadow-md top-[calc(100%-.3rem)] left-full dropDownMenu text-[.9rem] gap-2 w-52 h-auto list-none">
+                        <li class="pr-5  w-7 h-7 p-2 pb-6 rounded-full insertBookmark">insert&nbsp;BookMark</li>
+                        <div id="bookmarkList">
+                        </div>
+                    </ul>
+                </button>
+
+            </div>
             <button class="p-2 hover:bg-gray-200 rounded" title="Insert Line Chart" id="lineChart">
                 <i class="fas fa-chart-line"></i>
             </button>

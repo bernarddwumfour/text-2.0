@@ -1,5 +1,5 @@
 
-import { addQuotation, changeFontSize, changeFontType, colorText, copyText, cutText, exitFullScreen, highlightText, makeFullScreen,makeSubscript,makeSuperscript,pasteText,setLetterSpacing,setLineHeight,toggleOutline, uploadImage, uploadVideo, wrapParagraph } from "./_customFunctions.js";
+import { addBookmark, addCitation, addQuotation, changeFontSize, changeFontType, colorText, copyText, cutText, exitFullScreen, highlightText, makeFullScreen,makeSubscript,makeSuperscript,paragraphLineSpacing,pasteText,setLetterSpacing,setLineHeight,toggleOutline, uploadImage, uploadVideo, wrapParagraph } from "./_customFunctions.js";
 
 let elements = [
     { element: ".fullscreenBtn", command: makeFullScreen },
@@ -13,8 +13,10 @@ let elements = [
     { element: ".lineHeight", command:  ()=>setLineHeight(document.getElementById("lineHeightSelect").value) },
     { element: ".letterSpacing", command:  ()=>setLetterSpacing(document.getElementById("letterSpacingSelect").value) },
     { element: ".insertQuoteBtn", command: ()=>addQuotation()},
+    { element: ".addCitation", command: ()=>addCitation()},
+    { element: ".insertBookmark", command: ()=>addBookmark()},
     { element: ".wrapParagraph", command: ()=>wrapParagraph()},
-    { element: ".paragraphLineSpacing", command: ()=>wrapParagraph(document.getElementById("paragraphLineSpacing").value)}
+    { element: ".paragraphLineSpacing", command: ()=>paragraphLineSpacing(document.getElementById("paragraphLineSpacing").value)}
 ];
 
 const execCommand = (selector,action)=>{
