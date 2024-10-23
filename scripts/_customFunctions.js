@@ -595,3 +595,20 @@ export function paragraphLineSpacing(value) {
   }
 }
 
+export function renameDocument(documentName) {
+  // Use prompt to ask the user for the new document name
+  const newDocumentName = prompt("Enter a new name for your document:", document.title);
+  document.querySelector(documentName).textContent = newDocumentName
+
+  // If the user provides a name, update the document's title
+  if (newDocumentName && newDocumentName.trim() !== "") {
+      document.title = newDocumentName.trim(); // Set browser tab title
+      alert("Document renamed to: " + newDocumentName);
+  } else {
+      alert("Document name cannot be empty.");
+  }
+}
+
+export function clearEditorText() {
+  editor.innerHTML = ""; // Clear the content inside the editor
+}

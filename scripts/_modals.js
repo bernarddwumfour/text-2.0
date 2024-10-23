@@ -1,7 +1,7 @@
 let editor = document.querySelector('.textEditor')
 class Pagemodal {
     // #backdrop = document.getElementById('#modal');
-    #button;
+    #button;  
     #modalcontent;
     #modal = document.querySelector('#dummymodal');
     #type;

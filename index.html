@@ -242,13 +242,14 @@
                     <option value="0.4">0.4em</option>
                 </select>
             </button>
-            
+
             <button class="p-2 hover:bg-gray-200 rounded wrapParagraph" title="Wrap Paragraph" id="wrapParagraphBtn">
                 <i class="fas fa-paragraph"></i> <!-- Font Awesome icon for paragraph -->
             </button>
 
             <!-- Line Spacing Dropdown -->
-            <button class="paragraphLineSpacing p-2 hover:bg-gray-200 rounded line-spacing-wrapper" title="Line Spacing">
+            <button class="paragraphLineSpacing p-2 hover:bg-gray-200 rounded line-spacing-wrapper"
+                title="Line Spacing">
                 <label for="lineSpacing" class="sr-only">Line Spacing</label>
                 <select id="paragraphLineSpacing" class="p-2 bg-white border border-gray-300 rounded">
                     <option value="1">Single</option>
@@ -284,13 +285,14 @@
                 <i class="fas fa-quote-right"></i> <!-- Font Awesome icon for quotation -->
             </button>
             <button class="p-2 hover:bg-gray-200 rounded addCitation" title="Insert Citation" id="addCitation">
-                <i class="fas fa-book-open"></i> 
-            </button>            
+                <i class="fas fa-book-open"></i>
+            </button>
             <!-- <button class="p-2 hover:bg-gray-200 rounded insertBookmark" title="Insert Bookmark" id="addBookmark">
                 <i class="fas fa-bookmark"></i> 
             </button>   -->
             <div class="relative inline-block">
-                <button class="p-2 hover:bg-gray-200 rounded highlightTextButton dropDownButton bookmarkDropdown" title="Highlight Text">
+                <button class="p-2 hover:bg-gray-200 rounded highlightTextButton dropDownButton bookmarkDropdown"
+                    title="Highlight Text">
                     <i class="fas fa-bookmark"></i>
                     <ul
                         class="absolute bg-white hidden p-2 rounded-md shadow-md top-[calc(100%-.3rem)] left-full dropDownMenu text-[.9rem] gap-2 w-52 h-auto list-none">
@@ -351,6 +353,15 @@
             </button>
             <button class="p-2 hover:bg-gray-200 rounded" id="insertArrowBtn" title="Insert Arrow-Right">
                 <i class="fas fa-arrow-right"></i>
+            </button>
+            <!-- Rename Document Button -->
+            <button id="renameBtn" class="p-2 hover:bg-gray-200 rounded renameDocument" title="Rename Document">
+                <i class="fas fa-edit"></i> 
+            </button>
+
+            <!-- Clear Text Button -->
+            <button id="clearText" class="clearText p-2 hover:bg-gray-200 rounded clearDocument" title="Clear Text">
+                <i class="fas fa-trash"></i> 
             </button>
         </div>
     </div>
@@ -719,10 +730,14 @@
     </template>
 
     <!-- Contenteditable Area (A4 size) -->
-    <div id="textEditor" class="textEditor bg-white shadow-lg mx-auto p-10 py-18 relative" contenteditable="true"
+    <div id="textEditor" class="textEditor bg-white shadow-lg mx-auto p-10 py-18 relative mb-12" contenteditable="true"
         style="width: 210mm; height: 297mm;">
         <!-- <h2 class="text-center text-lg">Editable A4 Page</h2> -->
         <p>This is a contenteditable area that you can type in. It's the size of an A4 sheet.</p>
+    </div>
+
+    <div class="fixed w-full p-2 text-center bottom-0  bg-gray-100">
+        <span class="documentName">Document1.docx</span>.docx
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>

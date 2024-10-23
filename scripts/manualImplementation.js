@@ -1,8 +1,8 @@
 // Importing custom functions from another module
 import { 
-    addBookmark, addCitation, addQuotation, changeFontSize, changeFontType, colorText, 
+    addBookmark, addCitation, addQuotation, changeFontSize, changeFontType, clearEditorText, colorText, 
     copyText, cutText, exitFullScreen, highlightText, makeFullScreen, makeSubscript, 
-    makeSuperscript, paragraphLineSpacing, pasteText, setLetterSpacing, setLineHeight, 
+    makeSuperscript, paragraphLineSpacing, pasteText, renameDocument, setLetterSpacing, setLineHeight, 
     toggleOutline, uploadImage, uploadVideo, wrapParagraph 
 } from "./_customFunctions.js";
 
@@ -22,7 +22,10 @@ let elements = [
     { element: ".addCitation", command: () => addCitation() },      // Add a citation
     { element: ".insertBookmark", command: () => addBookmark() },   // Insert a bookmark
     { element: ".wrapParagraph", command: () => wrapParagraph() },  // Wrap text in a paragraph
-    { element: ".paragraphLineSpacing", command: () => paragraphLineSpacing(document.getElementById("paragraphLineSpacing").value) }  // Set paragraph line spacing
+    { element: ".paragraphLineSpacing", command: () => paragraphLineSpacing(document.getElementById("paragraphLineSpacing").value) } , // Set paragraph line spacing
+    { element: ".renameDocument", command: () => renameDocument(".documentName") },  // Rename the document and change the title to the name
+    { element: ".clearText", command: () => clearEditorText() },  // Rename the document and change the title to the name
+
 ];
 
 // Function to bind commands to elements' click events
